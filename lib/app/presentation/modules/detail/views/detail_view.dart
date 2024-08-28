@@ -7,6 +7,7 @@ import 'package:shoes_app/app/presentation/modules/detail/controllers/detail_con
 
 import '../../../globals/widgets/buttons.dart';
 import '../../../globals/widgets/shoe_description.dart';
+import '../../home/views/home_view.dart';
 
 class DetailView extends StatelessWidget {
   const DetailView({super.key});
@@ -22,7 +23,7 @@ class DetailView extends StatelessWidget {
           Hero(
             tag: '1',
             child: ShoeCard.detail(
-              shoe: state.shoe,
+              shoe: shoe,
               imagePath: state.selectedColor.imagePath,
             ),
           ),
@@ -35,8 +36,8 @@ class DetailView extends StatelessWidget {
                   tag: '2',
                   child: Material(
                     child: ShoeDescription(
-                      title: state.shoe.name,
-                      description: state.shoe.description,
+                      title: shoe.name,
+                      description: shoe.description,
                     ),
                   ),
                 ),
@@ -47,7 +48,7 @@ class DetailView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '\$${state.shoe.price}',
+                      '\$${shoe.price}',
                       style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w800,
                         fontSize: 20,
@@ -72,7 +73,7 @@ class DetailView extends StatelessWidget {
 }
 
 class _ColorsRow extends StatelessWidget {
-  const _ColorsRow({super.key});
+  const _ColorsRow();
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class _ColorsRow extends StatelessWidget {
     final state = detailController.state;
     double index = 0.0;
     return Row(
-      children: state.shoe.colors.map(
+      children: shoe.colors.map(
         (color) {
           final circle = Transform.translate(
             offset: Offset(-5 * index, 0),
@@ -126,7 +127,7 @@ class _ColorOption extends StatelessWidget {
 }
 
 class _OptionsRow extends StatelessWidget {
-  const _OptionsRow({super.key});
+  const _OptionsRow();
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +155,7 @@ class _OptionsRow extends StatelessWidget {
 }
 
 class _AnimatedBuyButton extends StatefulWidget {
-  const _AnimatedBuyButton({super.key});
+  const _AnimatedBuyButton();
 
   @override
   State<_AnimatedBuyButton> createState() => __AnimatedBuyButtonState();
@@ -221,7 +222,7 @@ class __AnimatedBuyButtonState extends State<_AnimatedBuyButton> with SingleTick
 }
 
 class _CustomGridView extends StatelessWidget {
-  const _CustomGridView({super.key});
+  const _CustomGridView();
 
   @override
   Widget build(BuildContext context) {

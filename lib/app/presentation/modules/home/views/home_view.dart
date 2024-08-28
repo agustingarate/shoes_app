@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shoes_app/app/domain/models/shoe_model.dart';
 import 'package:shoes_app/app/presentation/globals/widgets/shoe_card.dart';
@@ -6,7 +8,6 @@ import 'package:shoes_app/app/presentation/globals/widgets/shoe_description.dart
 import 'package:shoes_app/app/presentation/modules/home/widgets/bottom_bar.dart';
 import 'package:shoes_app/app/presentation/modules/home/widgets/custom_appbar.dart';
 
-import '../../../routes/routes.dart';
 import '../controllers/home_controller.dart';
 import '../states/home_state.dart';
 
@@ -24,6 +25,17 @@ final shoe = ShoeModel(
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
+
+  void _handleNavigation(BuildContext context, HomeState state) {
+    final uri = Uri(
+      path: '/details/54',
+      queryParameters: {
+        'size': state.selectedSize,
+      },
+    ).toString();
+
+    kIsWeb ? context.go(uri) : context.push(uri);
+  }
 
   Widget _bottomBar({
     String? price,
@@ -104,14 +116,7 @@ class HomeView extends StatelessWidget {
                     left: 0,
                     child: _bottomBar(
                       price: state.shoe.price,
-                      onPressed: () => Navigator.pushNamed(
-                        context,
-                        Routes.detail,
-                        arguments: {
-                          'shoe': state.shoe,
-                          'selectedSize': state.selectedSize,
-                        },
-                      ),
+                      onPressed: () => _handleNavigation(context, state),
                     ),
                   ),
                 ],

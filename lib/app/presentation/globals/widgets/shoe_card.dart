@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_app/app/presentation/globals/utils/colors.dart';
 
@@ -73,14 +75,15 @@ class ShoeCard extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        GestureDetector(
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.mainWhite,
-                            size: 30,
+                        if (!kIsWeb)
+                          GestureDetector(
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: AppColors.mainWhite,
+                              size: 30,
+                            ),
+                            onTap: () => context.pop(),
                           ),
-                          onTap: () => Navigator.pop(context),
-                        ),
                       ],
                     ),
                   _Shoe(
